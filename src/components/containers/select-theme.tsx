@@ -1,5 +1,5 @@
 import { ChangeEvent, useLayoutEffect } from "react";
-import { LOCALSTORAGE_KEYS } from "../../constants/localstorage";
+import { LOCAL_STORAGE_KEYS } from "../../constants/localstorage";
 
 const THEME_OPTIONS = [
   "light",
@@ -37,12 +37,12 @@ const THEME_OPTIONS = [
 ];
 
 function SelectTheme() {
-  const savedTheme = localStorage.getItem(LOCALSTORAGE_KEYS.THEME) || "Theme";
+  const savedTheme = localStorage.getItem(LOCAL_STORAGE_KEYS.THEME) || "Theme";
 
   const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedTheme = event.target.value;
 
-    localStorage.setItem(LOCALSTORAGE_KEYS.THEME, selectedTheme);
+    localStorage.setItem(LOCAL_STORAGE_KEYS.THEME, selectedTheme);
 
     document.documentElement.setAttribute("data-theme", selectedTheme);
   };
@@ -51,6 +51,7 @@ function SelectTheme() {
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
+  // TODO: create select component
   return (
     <select
       onChange={handleThemeChange}

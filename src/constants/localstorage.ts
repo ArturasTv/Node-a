@@ -1,3 +1,4 @@
-export const LOCALSTORAGE_KEYS = {
+export const LOCAL_STORAGE_KEYS = {
+  LINKED_LIST: "LINKED-LIST",
   THEME: "THEME",
 };

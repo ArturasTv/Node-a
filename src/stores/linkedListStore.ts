@@ -1,5 +1,7 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { LinkedListNode } from "../models/common";
+import { LOCAL_STORAGE_KEYS } from "../constants/localstorage";
 
 type LinkedListStore = {
   head: LinkedListNode | null;
@@ -14,146 +16,153 @@ type LinkedListStore = {
   reverse: () => void;
 };
 
-const useLinkedListStore = create<LinkedListStore>()((set, get) => ({
-  head: null,
-  push: (node) =>
-    set((state) => {
-      const { head } = state;
+const useLinkedListStore = create(
+  persist<LinkedListStore>(
+    (set, get) => ({
+      head: null,
+      push: (node) =>
+        set((state) => {
+          const { head } = state;
 
-      if (!head) {
-        return {
-          head: {
+          if (!head) {
+            return {
+              head: {
+                ...node,
+                index: 0,
+              },
+            };
+          }
+
+          const tail = getTail(head);
+
+          const newNode = {
             ...node,
-            index: 0,
-          },
-        };
-      }
+            index: tail.index + 1,
+          };
 
-      const tail = getTail(head);
+          tail.next = newNode;
 
-      const newNode = {
-        ...node,
-        index: tail.index + 1,
-      };
+          return { head: deepClone(head) };
+        }),
+      pop: () =>
+        set((state) => {
+          const { head } = state;
 
-      tail.next = newNode;
+          if (!head || !head.next) return { head: null };
 
-      return { head: deepClone(head) };
-    }),
-  pop: () =>
-    set((state) => {
-      const { head } = state;
+          const current = getBeforeTail(head);
+          current.next = null;
 
-      if (!head || !head.next) return { head: null };
+          return { head: deepClone(head) };
+        }),
+      shift: () =>
+        set((state) => {
+          const { head } = state;
 
-      const current = getBeforeTail(head);
-      current.next = null;
+          if (!head || !head.next) return { head: null };
 
-      return { head: deepClone(head) };
-    }),
-  shift: () =>
-    set((state) => {
-      const { head } = state;
+          return { head: deepClone(head.next) };
+        }),
+      getLength: () => {
+        let count = 1;
 
-      if (!head || !head.next) return { head: null };
+        const { head } = get();
 
-      return { head: deepClone(head.next) };
-    }),
-  getLength: () => {
-    let count = 1;
+        if (!head) return 0;
 
-    const { head } = get();
+        let current = head;
 
-    if (!head) return 0;
-
-    let current = head;
-
-    while (current.next) {
-      current = current.next;
-      count++;
-    }
-
-    return count;
-  },
-  getHead: () => {
-    const { head } = get();
-
-    return head;
-  },
-  getTail: () => {
-    const { head } = get();
-
-    if (!head) return null;
-
-    const tail = getTail(head);
-
-    return tail;
-  },
-  find: (index) => {
-    const { head } = get();
-
-    if (!head) return null;
-
-    let current = head;
-
-    while (current.next) {
-      if (current.index === index) return current;
-
-      current = current.next;
-    }
-
-    return null;
-  },
-  remove: (index) =>
-    set((state) => {
-      const { head } = state;
-
-      if (!head) {
-        return {
-          head: null,
-        };
-      }
-      let found = false;
-      let current = head;
-
-      if (current.index === index) {
-        return { head: deepClone(head.next!) };
-      }
-
-      while (current.next && !found) {
-        if (current.next.index === index) {
-          found = true;
-          break;
+        while (current.next) {
+          current = current.next;
+          count++;
         }
 
-        current = current.next;
-      }
+        return count;
+      },
+      getHead: () => {
+        const { head } = get();
 
-      if (found) {
-        current.next = current.next!.next;
-      }
+        return head;
+      },
+      getTail: () => {
+        const { head } = get();
 
-      return { head: deepClone(head) };
+        if (!head) return null;
+
+        const tail = getTail(head);
+
+        return tail;
+      },
+      find: (index) => {
+        const { head } = get();
+
+        if (!head) return null;
+
+        let current = head;
+
+        while (current.next) {
+          if (current.index === index) return current;
+
+          current = current.next;
+        }
+
+        return null;
+      },
+      remove: (index) =>
+        set((state) => {
+          const { head } = state;
+
+          if (!head) {
+            return {
+              head: null,
+            };
+          }
+          let found = false;
+          let current = head;
+
+          if (current.index === index) {
+            return { head: deepClone(head.next!) };
+          }
+
+          while (current.next && !found) {
+            if (current.next.index === index) {
+              found = true;
+              break;
+            }
+
+            current = current.next;
+          }
+
+          if (found) {
+            current.next = current.next!.next;
+          }
+
+          return { head: deepClone(head) };
+        }),
+      reverse: () =>
+        set((state) => {
+          let { head } = state;
+
+          let prev = null;
+          let current = head;
+
+          while (current !== null) {
+            const nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+          }
+
+          head = prev;
+
+          return { head };
+        }),
     }),
-  reverse: () =>
-    set((state) => {
-      let { head } = state;
-
-      let prev = null;
-      let current = head;
-
-      while (current !== null) {
-        const nextNode = current.next;
-        current.next = prev;
-        prev = current;
-        current = nextNode;
-      }
-
-      head = prev;
-
-      return { head };
-    }),
-}));
+    {
+      name: LOCAL_STORAGE_KEYS.LINKED_LIST,
+    }
+  )
+);
 
 function getTail(head: LinkedListNode) {
   let tail = head;
