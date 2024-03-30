@@ -10,7 +10,7 @@ type Props = {
 function LinkedList({ head, onDelete }: Props) {
   // TODO: move this utility function to separate file for transforming linked list to array
   const generateNodes = () => {
-    const array: Omit<LinkedListNode, "next">[] = [];
+    const array: { data: number }[] = [];
 
     if (!head) return [];
 
@@ -19,7 +19,6 @@ function LinkedList({ head, onDelete }: Props) {
     while (current.next) {
       array.push({
         data: current.data,
-        index: current.index,
       });
 
       current = current.next;
@@ -27,7 +26,6 @@ function LinkedList({ head, onDelete }: Props) {
 
     array.push({
       data: current.data,
-      index: current.index,
     });
 
     return array;
@@ -44,13 +42,13 @@ function LinkedList({ head, onDelete }: Props) {
       {items.map((node) => (
         <Reorder.Item
           drag={false}
-          key={`${node.data}-${node.index}`}
+          key={`${node.data}`}
           value={node}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Node data={node.data} index={node.index} onDelete={onDelete} />
+          <Node data={node.data} onDelete={onDelete} />
         </Reorder.Item>
       ))}
     </Reorder.Group>

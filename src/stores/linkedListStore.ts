@@ -5,14 +5,14 @@ import { LOCAL_STORAGE_KEYS } from "../constants/localstorage";
 
 type LinkedListStore = {
   head: LinkedListNode | null;
-  push: (node: Omit<LinkedListNode, "index">) => void;
+  push: (node: LinkedListNode) => void;
   pop: () => void;
   shift: () => void;
   getLength: () => number;
   getHead: () => LinkedListNode | null;
   getTail: () => LinkedListNode | null;
-  find: (index: number) => LinkedListNode | null;
-  remove: (index: number) => void;
+  find: (data: number) => LinkedListNode | null;
+  remove: (data: number) => void;
   reverse: () => void;
 };
 
@@ -35,12 +35,7 @@ const useLinkedListStore = create(
 
           const tail = getTail(head);
 
-          const newNode = {
-            ...node,
-            index: tail.index + 1,
-          };
-
-          tail.next = newNode;
+          tail.next = node;
 
           return { head: deepClone(head) };
         }),
@@ -93,7 +88,7 @@ const useLinkedListStore = create(
 
         return tail;
       },
-      find: (index) => {
+      find: (data) => {
         const { head } = get();
 
         if (!head) return null;
@@ -101,14 +96,14 @@ const useLinkedListStore = create(
         let current = head;
 
         while (current.next) {
-          if (current.index === index) return current;
+          if (current.data === data) return current;
 
           current = current.next;
         }
 
         return null;
       },
-      remove: (index) =>
+      remove: (data) =>
         set((state) => {
           const { head } = state;
 
@@ -120,12 +115,12 @@ const useLinkedListStore = create(
           let found = false;
           let current = head;
 
-          if (current.index === index) {
+          if (current.data === data) {
             return { head: deepClone(head.next!) };
           }
 
           while (current.next && !found) {
-            if (current.next.index === index) {
+            if (current.next.data === data) {
               found = true;
               break;
             }

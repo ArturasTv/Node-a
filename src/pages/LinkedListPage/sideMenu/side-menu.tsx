@@ -4,7 +4,7 @@ import { cn } from "../../../utils/common";
 import { getRandomNumber } from "../../../utils/math";
 
 const MIN_VALUE = 0;
-const MAX_VALUE = 50;
+const MAX_VALUE = 5000;
 
 type Props = {
   className?: string;

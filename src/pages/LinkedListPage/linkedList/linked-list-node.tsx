@@ -1,18 +1,16 @@
 import { cn } from "../../../utils/common";
 
 type Props = {
-  index: number;
   data: number;
   onDelete: (index: number) => void;
 };
 
-function Node({ index, onDelete, data }: Props) {
+function Node({ onDelete, data }: Props) {
   return (
     <div className="size-16 rounded-full bg-primary justify-center items-center flex relative">
-      <NodeIndex index={index} className="absolute top-0 right-0" />
       <NodeDeleteButton
         onDelete={onDelete}
-        index={index}
+        data={data}
         className="absolute bottom-0 right-0"
       />
       <span className="text-primary-content">{data}</span>
@@ -20,32 +18,14 @@ function Node({ index, onDelete, data }: Props) {
   );
 }
 
-type NodeIndexProps = {
-  index: number;
-  className: string;
-};
-
-function NodeIndex({ index, className }: NodeIndexProps) {
-  return (
-    <div
-      className={cn(
-        "bg-accent size-5 justify-center items-center flex rounded-full",
-        className
-      )}
-    >
-      <span className="text-accent-content text-sm leading-snug">{index}</span>
-    </div>
-  );
-}
-
 type NodeDeleteButtonProps = {
-  index: number;
+  data: number;
   className: string;
   onDelete: (index: number) => void;
 };
 
 function NodeDeleteButton({
-  index,
+  data,
   className,
   onDelete,
 }: NodeDeleteButtonProps) {
@@ -55,7 +35,7 @@ function NodeDeleteButton({
         "bg-error size-5 justify-center items-center flex rounded-full",
         className
       )}
-      onClick={() => onDelete(index)}
+      onClick={() => onDelete(data)}
     >
       <span className="text-white text-sm leading-snug">x</span>
     </button>
