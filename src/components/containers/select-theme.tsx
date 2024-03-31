@@ -3,6 +3,7 @@ import { LOCAL_STORAGE_KEYS } from "../../constants/localstorage";
 import { THEME_OPTIONS } from "../../constants/themes";
 import { useTranslation } from "react-i18next";
 import { cn } from "../../utils/common";
+import Select from "../ui/select";
 
 type Props = {
   className?: string;
@@ -25,20 +26,19 @@ function SelectTheme({ className }: Props) {
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
-  // TODO: create select component
   return (
-    <select
+    <Select
       onChange={handleThemeChange}
       className={cn("select", className)}
       defaultValue={savedTheme}
     >
-      <option disabled>{t("theme")}</option>
+      <Select.Option disabled>{t("theme")}</Select.Option>
       {THEME_OPTIONS.map((option) => (
-        <option value={option} key={option}>
+        <Select.Option value={option} key={option}>
           {t(`daisyThemes.${option}`)}
-        </option>
+        </Select.Option>
       ))}
-    </select>
+    </Select>
   );
 }
 
