@@ -23,7 +23,6 @@ function SideMenu({ className }: Props) {
   const reverse = useLinkedListStore((state) => state.reverse);
   const length = useLinkedListStore((state) => state.getLength());
 
-  // TODO: create array for buttons
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <Button
