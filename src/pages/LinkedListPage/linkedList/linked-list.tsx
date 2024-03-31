@@ -35,20 +35,21 @@ function LinkedList({ head, onDelete }: Props) {
 
   return (
     <Reorder.Group
-      className="flex gap-4 flex-wrap"
+      className="flex gap-11 flex-wrap"
       values={items}
       onReorder={() => null}
     >
-      {items.map((node) => (
+      {items.map((node, index) => (
         <Reorder.Item
           drag={false}
-          key={`${node.data}`}
           value={node}
+          key={`${node.data}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          className="fill-primary stroke-primary"
         >
-          <Node data={node.data} onDelete={onDelete} />
+          <Node data={node.data} onDelete={onDelete} id={`node-${index}`} />
         </Reorder.Item>
       ))}
     </Reorder.Group>

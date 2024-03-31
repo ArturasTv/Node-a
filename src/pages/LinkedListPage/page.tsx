@@ -8,12 +8,14 @@ function Page() {
   const remove = useLinkedListStore((state) => state.remove);
 
   return (
-    <SideCard
-      className="md:container w-full min-h-96"
-      content={<LinkedList onDelete={remove} head={head} />}
-      sideBar={<SideMenu className="min-w-48" />}
-      title="Linked list"
-    />
+    <>
+      <SideCard
+        className="md:container w-full min-h-96"
+        content={<LinkedList onDelete={remove} head={head} />}
+        sideBar={<SideMenu className="min-w-48" />}
+        title="Linked list"
+      />
+    </>
   );
 }
 

@@ -33,25 +33,19 @@ function SideMenu({ className }: Props) {
       </Button>
       <Button
         isFullWidth
-        onClick={() => {
-          pop();
-        }}
+        onClick={pop}
       >
         Pop
       </Button>
       <Button
         isFullWidth
-        onClick={() => {
-          shift();
-        }}
+        onClick={shift}
       >
         Shift
       </Button>
       <Button
         isFullWidth
-        onClick={() => {
-          reverse();
-        }}
+        onClick={reverse}
       >
         Reverse
       </Button>
