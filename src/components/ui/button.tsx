@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import { cn } from "../../utils/common";
 
-type ButtonVariants = "primary" | "secondary";
+type ButtonVariants = "primary" | "secondary" | "accent";
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants;
@@ -16,6 +16,7 @@ function Button({ className, variant, isFullWidth, ...props }: Props) {
         {
           "btn-primary": variant === "primary",
           "btn-secondary": variant === "secondary",
+          "btn-accent": variant === "accent",
         },
         {
           "btn-block": isFullWidth,

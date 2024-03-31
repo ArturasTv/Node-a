@@ -35,7 +35,7 @@ function LinkedList({ head, onDelete }: Props) {
 
   return (
     <Reorder.Group
-      className="flex gap-11 flex-wrap"
+      className="flex gap-4 flex-wrap"
       values={items}
       onReorder={() => null}
     >

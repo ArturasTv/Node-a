@@ -1,35 +1,43 @@
+import { Link } from "@tanstack/react-router";
 import SelectTheme from "./select-theme";
-
-const NAVIGATION_ITEMS = [
-  {
-    title: "Linked list",
-    href: "linked-list",
-  },
-];
+import ToggleLanguage from "./toggle-language";
+import { generateNavigationItemsWithTranslation } from "../../constants/navigation";
+import { useTranslation } from "react-i18next";
 
 function Navigation() {
+  const { t } = useTranslation();
+
+  const NAVIGATION_ITEMS = generateNavigationItemsWithTranslation(t);
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <NavigationMobile />
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {NAVIGATION_ITEMS.map((item) => (
-            <li key={item.href}>
-              <a href={item.href}>{item.title}</a>
+        <ul className="menu menu-horizontal px-1 gap-2">
+          {NAVIGATION_ITEMS.map((item, index) => (
+            <li key={index}>
+              <Link to={item.href} from="/">
+                {item.title}
+              </Link>
             </li>
           ))}
         </ul>
       </div>
-      <div className="navbar-end">
-        <SelectTheme />
+      <div className="navbar-end gap-4">
+        <ToggleLanguage />
+        <SelectTheme className="w-40" />
       </div>
     </div>
   );
 }
 
 function NavigationMobile() {
+  const { t } = useTranslation();
+
+  const NAVIGATION_ITEMS = generateNavigationItemsWithTranslation(t);
+
   return (
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -39,9 +47,9 @@ function NavigationMobile() {
         tabIndex={0}
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
-        {NAVIGATION_ITEMS.map((item) => (
-          <li key={item.href}>
-            <a href={item.href}>{item.title}</a>
+        {NAVIGATION_ITEMS.map((item, index) => (
+          <li key={index}>
+            <Link to={item.href}>{item.title}</Link>
           </li>
         ))}
       </ul>

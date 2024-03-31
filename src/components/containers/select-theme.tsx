@@ -1,42 +1,16 @@
 import { ChangeEvent, useLayoutEffect } from "react";
 import { LOCAL_STORAGE_KEYS } from "../../constants/localstorage";
+import { THEME_OPTIONS } from "../../constants/themes";
+import { useTranslation } from "react-i18next";
+import { cn } from "../../utils/common";
 
-const THEME_OPTIONS = [
-  "light",
-  "dark",
-  "cupcake",
-  "bumblebee",
-  "emerald",
-  "corporate",
-  "synthwave",
-  "retro",
-  "cyberpunk",
-  "valentine",
-  "halloween",
-  "garden",
-  "forest",
-  "aqua",
-  "lofi",
-  "pastel",
-  "fantasy",
-  "wireframe",
-  "black",
-  "luxury",
-  "dracula",
-  "cmyk",
-  "autumn",
-  "business",
-  "acid",
-  "lemonade",
-  "night",
-  "coffee",
-  "winter",
-  "dim",
-  "nord",
-  "sunset",
-];
+type Props = {
+  className?: string;
+};
 
-function SelectTheme() {
+function SelectTheme({ className }: Props) {
+  const { t } = useTranslation();
+
   const savedTheme = localStorage.getItem(LOCAL_STORAGE_KEYS.THEME) || "Theme";
 
   const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -55,12 +29,14 @@ function SelectTheme() {
   return (
     <select
       onChange={handleThemeChange}
-      className="select"
+      className={cn("select", className)}
       defaultValue={savedTheme}
     >
-      <option disabled>Theme</option>
+      <option disabled>{t("theme")}</option>
       {THEME_OPTIONS.map((option) => (
-        <option key={option}>{option}</option>
+        <option value={option} key={option}>
+          {t(`daisyThemes.${option}`)}
+        </option>
       ))}
     </select>
   );
