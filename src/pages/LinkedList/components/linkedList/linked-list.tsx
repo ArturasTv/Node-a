@@ -1,6 +1,8 @@
 import { Reorder } from "framer-motion";
-import { LinkedListNode } from "../../../models/common";
-import Node from "./linked-list-node";
+import { LinkedListNode } from "../../../../models/common";
+import useLinkedListStore from "../../../../stores/linkedListStore";
+import { useEffect, useState } from "react";
+import Node from "../../../../components/ui/node";
 
 type Props = {
   head: LinkedListNode | null;
@@ -8,9 +10,8 @@ type Props = {
 };
 
 function LinkedList({ head, onDelete }: Props) {
-  // TODO: move this utility function to separate file for transforming linked list to array
   const generateNodes = () => {
-    const array: { data: number }[] = [];
+    const array = [];
 
     if (!head) return [];
 
@@ -31,7 +32,14 @@ function LinkedList({ head, onDelete }: Props) {
     return array;
   };
 
-  const items = generateNodes();
+  const [items, setItems] = useState(generateNodes());
+
+  const length = useLinkedListStore((state) => state.getLength());
+
+  useEffect(() => {
+    const newItems = generateNodes();
+    setItems(newItems);
+  }, [length, head]);
 
   return (
     <Reorder.Group
@@ -39,17 +47,19 @@ function LinkedList({ head, onDelete }: Props) {
       values={items}
       onReorder={() => null}
     >
-      {items.map((node, index) => (
+      {items.map((node) => (
         <Reorder.Item
-          drag={false}
+          drag
+          draggable
+          dragSnapToOrigin={false}
           value={node}
           key={`${node.data}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fill-primary stroke-primary"
+          className="fill-primary stroke-primary h-fit w-fit"
         >
-          <Node data={node.data} onDelete={onDelete} id={`node-${index}`} />
+          <Node data={node.data} onDelete={onDelete} />
         </Reorder.Item>
       ))}
     </Reorder.Group>

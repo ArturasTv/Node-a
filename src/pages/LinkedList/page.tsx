@@ -1,7 +1,7 @@
 import BasicLayout from "../../layouts/basic-layout";
 import useLinkedListStore from "../../stores/linkedListStore";
-import LinkedList from "./linkedList/linked-list";
-import SideMenu from "./sideMenu/side-menu";
+import LinkedList from "./components/linkedList/linked-list";
+import SideMenu from "./components/sideMenu/side-menu";
 
 function Page() {
   const head = useLinkedListStore((state) => state.head);

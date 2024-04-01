@@ -4,6 +4,10 @@ import { TFunction } from "i18next";
 export const generateNavigationItemsWithTranslation = (t: TFunction) => {
   return [
     {
+      title: t("home"),
+      href: "/",
+    },
+    {
       title: t("linkedList"),
       href: "/linked-list",
     },

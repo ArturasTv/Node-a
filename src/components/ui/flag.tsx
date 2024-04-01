@@ -1,6 +1,6 @@
-import WorldFlag from "react-world-flags";
+import { CircleFlag } from "react-circle-flags";
 
-type FlagCodes = "LT" | "US";
+type FlagCodes = "lt" | "us";
 
 type Props = {
   code: FlagCodes;
@@ -10,7 +10,12 @@ type Props = {
 
 function Flag({ code, size, className }: Props) {
   return (
-    <WorldFlag code={code} height={size} width={size} className={className} />
+    <CircleFlag
+      countryCode={code}
+      height={size}
+      width={size}
+      className={className}
+    />
   );
 }
 

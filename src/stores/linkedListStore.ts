@@ -2,19 +2,10 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { LinkedListNode } from "../models/common";
 import { LOCAL_STORAGE_KEYS } from "../constants/localstorage";
+import { Store } from "./common";
+import { getBeforeTail, getTail } from "../utils/nodes";
 
-type LinkedListStore = {
-  head: LinkedListNode | null;
-  push: (node: LinkedListNode) => void;
-  pop: () => void;
-  shift: () => void;
-  getLength: () => number;
-  getHead: () => LinkedListNode | null;
-  getTail: () => LinkedListNode | null;
-  find: (data: number) => LinkedListNode | null;
-  remove: (data: number) => void;
-  reverse: () => void;
-};
+type LinkedListStore = Store<LinkedListNode>;
 
 const useLinkedListStore = create(
   persist<LinkedListStore>(
@@ -26,10 +17,7 @@ const useLinkedListStore = create(
 
           if (!head) {
             return {
-              head: {
-                ...node,
-                index: 0,
-              },
+              head: node,
             };
           }
 
@@ -37,7 +25,7 @@ const useLinkedListStore = create(
 
           tail.next = node;
 
-          return { head: deepClone(head) };
+          return { head: head };
         }),
       pop: () =>
         set((state) => {
@@ -48,7 +36,7 @@ const useLinkedListStore = create(
           const current = getBeforeTail(head);
           current.next = null;
 
-          return { head: deepClone(head) };
+          return { head: head };
         }),
       shift: () =>
         set((state) => {
@@ -56,7 +44,7 @@ const useLinkedListStore = create(
 
           if (!head || !head.next) return { head: null };
 
-          return { head: deepClone(head.next) };
+          return { head: head.next };
         }),
       getLength: () => {
         let count = 1;
@@ -116,7 +104,7 @@ const useLinkedListStore = create(
           let current = head;
 
           if (current.data === data) {
-            return { head: deepClone(head.next!) };
+            return { head: head.next };
           }
 
           while (current.next && !found) {
@@ -132,7 +120,7 @@ const useLinkedListStore = create(
             current.next = current.next!.next;
           }
 
-          return { head: deepClone(head) };
+          return { head: head };
         }),
       reverse: () =>
         set((state) => {
@@ -159,27 +147,4 @@ const useLinkedListStore = create(
   )
 );
 
-function getTail(head: LinkedListNode) {
-  let tail = head;
-
-  while (tail.next) {
-    tail = tail.next;
-  }
-
-  return tail;
-}
-
-function getBeforeTail(head: LinkedListNode) {
-  let beforeTail = head;
-
-  while (beforeTail?.next?.next) {
-    beforeTail = beforeTail.next;
-  }
-  return beforeTail;
-}
-
-// TODO: investigate should I need this deep cloning
-function deepClone(object: object) {
-  return JSON.parse(JSON.stringify(object));
-}
 export default useLinkedListStore;

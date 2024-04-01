@@ -1,7 +1,7 @@
-import Button from "../../../components/ui/button";
-import useLinkedListStore from "../../../stores/linkedListStore";
-import { cn } from "../../../utils/common";
-import { getRandomNumber } from "../../../utils/math";
+import Button from "../../../../components/ui/button";
+import useLinkedListStore from "../../../../stores/linkedListStore";
+import { cn } from "../../../../utils/common";
+import { getRandomNumber } from "../../../../utils/math";
 import { useTranslation } from "react-i18next";
 
 const MIN_VALUE = 0;

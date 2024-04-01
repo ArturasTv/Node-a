@@ -1,17 +1,13 @@
-import { cn } from "../../../utils/common";
+import { cn } from "../../utils/common";
 
 type Props = {
   data: number;
   onDelete: (index: number) => void;
-  id: string;
 };
 
-function Node({ onDelete, data, id }: Props) {
+function Node({ onDelete, data }: Props) {
   return (
-    <div
-      id={id}
-      className="size-16 rounded-full bg-primary justify-center items-center flex relative"
-    >
+    <div className="size-16 rounded-full bg-primary justify-center items-center flex relative">
       <NodeDeleteButton
         onDelete={onDelete}
         data={data}

@@ -15,7 +15,7 @@ function Navigation() {
         <NavigationMobile />
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-2">
+        <ul className="menu menu-horizontal px-1 gap-4">
           {NAVIGATION_ITEMS.map((item, index) => (
             <li key={index}>
               <Link to={item.href} from="/">

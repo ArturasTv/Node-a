@@ -24,7 +24,7 @@ function SelectTheme({ className }: Props) {
 
   useLayoutEffect(() => {
     document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
+  }, [savedTheme]);
 
   return (
     <Select

@@ -1,21 +1,22 @@
 import { Outlet, createRootRoute, createRouter } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { linkedListRoute } from "../pages/LinkedListPage/route";
+import { linkedListRoute } from "../pages/LinkedList/route";
 import MainLayout from "../layouts/main-layout";
+import { doublyLinkedListRoute } from "../pages/DoublyLinkedList/route";
 
-// TODO: create layout system
 export const rootRoute = createRootRoute({
   component: () => (
-    <>
-      <MainLayout>
-        <Outlet />
-        <TanStackRouterDevtools />
-      </MainLayout>
-    </>
+    <MainLayout>
+      <Outlet />
+      <TanStackRouterDevtools />
+    </MainLayout>
   ),
 });
 
-const routeTree = rootRoute.addChildren([linkedListRoute]);
+const routeTree = rootRoute.addChildren([
+  linkedListRoute,
+  doublyLinkedListRoute,
+]);
 
 const router = createRouter({ routeTree });
 
