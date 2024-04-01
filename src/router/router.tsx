@@ -1,5 +1,4 @@
 import { Outlet, createRootRoute, createRouter } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { linkedListRoute } from "../pages/LinkedList/route";
 import MainLayout from "../layouts/main-layout";
 import { doublyLinkedListRoute } from "../pages/DoublyLinkedList/route";
@@ -9,7 +8,6 @@ export const rootRoute = createRootRoute({
   component: () => (
     <MainLayout>
       <Outlet />
-      <TanStackRouterDevtools />
     </MainLayout>
   ),
 });
