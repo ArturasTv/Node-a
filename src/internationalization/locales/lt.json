@@ -41,5 +41,9 @@
   "pop": "Pašalinti pabaigoje",
   "push": "Pridėti pabaigoje",
   "shift": "Pašalinti priekyje",
-  "reverse": "Pakeisti tvarką"
+  "reverse": "Pakeisti tvarką",
+  "dataStructuresVisualization": "Duomenų struktūrų vizualizacija",
+  "exploreAndManipulateDataStructures": "Vizualiai tyrinėkite ir manipuliuokite įvairiomis duomenų struktūromis.",
+  "moreDataStructuresComingSoon": "Netrukus bus papildyta naujomis duomenų struktūromis.",
+  "copyright": "© {{currentYear}} Node'a. Visos teisės saugomos."
 }

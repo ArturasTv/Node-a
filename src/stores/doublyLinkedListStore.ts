@@ -5,6 +5,7 @@ import { getBeforeTail, getTail } from "../utils/nodes";
 
 type DoublyLinkedListStore = Store<DoublyLinkedListNode>;
 
+// TODO: investigate how to persist circular reference objects inside localstorage
 const useDoublyLinkedListStore = create<DoublyLinkedListStore>((set, get) => ({
   head: null,
   push: (node) =>
@@ -23,7 +24,6 @@ const useDoublyLinkedListStore = create<DoublyLinkedListStore>((set, get) => ({
 
       node.prev = null;
 
-      // Check if the current tail node exists and update its previous reference
       if (tail) {
         node.prev = tail;
       }

@@ -3,6 +3,7 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { linkedListRoute } from "../pages/LinkedList/route";
 import MainLayout from "../layouts/main-layout";
 import { doublyLinkedListRoute } from "../pages/DoublyLinkedList/route";
+import { homeRoute } from "../pages/Home/route";
 
 export const rootRoute = createRootRoute({
   component: () => (
@@ -14,6 +15,7 @@ export const rootRoute = createRootRoute({
 });
 
 const routeTree = rootRoute.addChildren([
+  homeRoute,
   linkedListRoute,
   doublyLinkedListRoute,
 ]);

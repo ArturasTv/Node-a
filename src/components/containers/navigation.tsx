@@ -3,6 +3,7 @@ import SelectTheme from "./select-theme";
 import ToggleLanguage from "./toggle-language";
 import { generateNavigationItemsWithTranslation } from "../../constants/navigation";
 import { useTranslation } from "react-i18next";
+import Logo from "./logo";
 
 function Navigation() {
   const { t } = useTranslation();
@@ -13,6 +14,9 @@ function Navigation() {
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <NavigationMobile />
+        <Link to="/">
+          <Logo className="w-32 fill-accent hidden lg:flex" />
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-4">
