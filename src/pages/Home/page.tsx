@@ -1,6 +1,5 @@
 import CenterLayout from "../../layouts/center-layout";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
 import ExplodingButton from "../../components/ui/exploding-button";
 
 function Page() {
