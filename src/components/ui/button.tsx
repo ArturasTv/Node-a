@@ -1,14 +1,14 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cn } from "../../utils/common";
 
-type ButtonVariants = "primary" | "secondary" | "accent";
+type Variants = "primary" | "secondary" | "accent" | "success";
 
-export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: ButtonVariants;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: Variants;
     isFullWidth?: boolean;
 }
 
-function Button({ className, variant, isFullWidth, ...props }: Props) {
+function Button({ className, variant, isFullWidth, ...props }: ButtonProps) {
     return (
         <button
             className={cn(
@@ -17,6 +17,7 @@ function Button({ className, variant, isFullWidth, ...props }: Props) {
                     "btn-primary": variant === "primary",
                     "btn-secondary": variant === "secondary",
                     "btn-accent": variant === "accent",
+                    "btn-success": variant === "success",
                 },
                 {
                     "btn-block": isFullWidth,

@@ -1,5 +1,7 @@
 import CenterLayout from "../../layouts/center-layout";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import ExplodingButton from "../../components/ui/exploding-button";
 
 function Page() {
     const { t } = useTranslation();
@@ -10,10 +12,10 @@ function Page() {
                 <h1 className="text-4xl font-bold mb-4">{t("dataStructuresVisualization")}</h1>
                 <p className="text-lg text-gray-700 mb-8">{t("exploreAndManipulateDataStructures")}</p>
                 <div className="flex justify-center space-x-4 mb-8">
-                    <div className="btn btn-primary">{t("push")}</div>
-                    <div className="btn btn-secondary">{t("pop")}</div>
-                    <div className="btn btn-success">{t("shift")}</div>
-                    <div className="btn btn-accent">{t("reverse")}</div>
+                    <ExplodingButton variant="primary">{t("push")}</ExplodingButton>
+                    <ExplodingButton variant="secondary">{t("pop")}</ExplodingButton>
+                    <ExplodingButton variant="success">{t("shift")}</ExplodingButton>
+                    <ExplodingButton variant="accent">{t("reverse")}</ExplodingButton>
                 </div>
                 <p className="text-gray-600">{t("moreDataStructuresComingSoon")}</p>
             </div>
