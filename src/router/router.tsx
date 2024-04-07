@@ -5,25 +5,21 @@ import { doublyLinkedListRoute } from "../pages/DoublyLinkedList/route";
 import { homeRoute } from "../pages/Home/route";
 
 export const rootRoute = createRootRoute({
-  component: () => (
-    <MainLayout>
-      <Outlet />
-    </MainLayout>
-  ),
+    component: () => (
+        <MainLayout>
+            <Outlet />
+        </MainLayout>
+    ),
 });
 
-const routeTree = rootRoute.addChildren([
-  homeRoute,
-  linkedListRoute,
-  doublyLinkedListRoute,
-]);
+const routeTree = rootRoute.addChildren([homeRoute, linkedListRoute, doublyLinkedListRoute]);
 
 const router = createRouter({ routeTree });
 
 declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
+    interface Register {
+        router: typeof router;
+    }
 }
 
 export default router;

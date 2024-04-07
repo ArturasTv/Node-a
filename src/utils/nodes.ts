@@ -1,22 +1,22 @@
 export type NodeWithNext<T> = {
-  next: T | null;
+    next: T | null;
 };
 
 export function getTail<T extends NodeWithNext<T>>(head: T) {
-  let tail = head;
+    let tail = head;
 
-  while (tail.next) {
-    tail = tail.next;
-  }
+    while (tail.next) {
+        tail = tail.next;
+    }
 
-  return tail;
+    return tail;
 }
 
 export function getBeforeTail<T extends NodeWithNext<T>>(head: T) {
-  let beforeTail = head;
+    let beforeTail = head;
 
-  while (beforeTail?.next?.next) {
-    beforeTail = beforeTail.next;
-  }
-  return beforeTail;
+    while (beforeTail?.next?.next) {
+        beforeTail = beforeTail.next;
+    }
+    return beforeTail;
 }

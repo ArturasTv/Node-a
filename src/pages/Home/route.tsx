@@ -3,7 +3,7 @@ import { rootRoute } from "../../router/router";
 import Page from "./page";
 
 export const homeRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/",
-  component: Page,
+    getParentRoute: () => rootRoute,
+    path: "/",
+    component: Page,
 });

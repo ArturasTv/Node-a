@@ -1,12 +1,12 @@
 export type Node = {
-  data: number;
+    data: number;
 };
 
 export type LinkedListNode = Node & {
-  next: LinkedListNode | null;
+    next: LinkedListNode | null;
 };
 
 export type DoublyLinkedListNode = Node & {
-  next: DoublyLinkedListNode | null;
-  prev: DoublyLinkedListNode | null;
+    next: DoublyLinkedListNode | null;
+    prev: DoublyLinkedListNode | null;
 };
