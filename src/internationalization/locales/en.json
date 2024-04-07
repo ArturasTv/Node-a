@@ -45,5 +45,6 @@
     "dataStructuresVisualization": "Data structures visualization",
     "exploreAndManipulateDataStructures": "Explore and manipulate various data structures visually.",
     "moreDataStructuresComingSoon": "More data structures will be added in the future.",
-    "copyright": "© {{currentYear}} Node'a. All rights reserved."
+    "copyright": "© {{currentYear}} Node'a. All rights reserved.",
+    "dataStructures": "Data Structures"
 }

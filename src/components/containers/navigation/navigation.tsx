@@ -1,14 +1,19 @@
 import { Link } from "@tanstack/react-router";
-import SelectTheme from "./select-theme";
-import ToggleLanguage from "./toggle-language";
-import { generateNavigationItemsWithTranslation } from "../../constants/navigation";
+import SelectTheme from "../select-theme";
+import ToggleLanguage from "../toggle-language";
+import {
+    generateDataStructuresNavigationItemsWithTranslation,
+    generateNavigationItemsWithTranslation,
+} from "../../../constants/navigation";
 import { useTranslation } from "react-i18next";
-import Logo from "./logo";
+import Logo from "../logo";
+import NavigationDropdown from "./navigation-dropdown";
 
 function Navigation() {
     const { t } = useTranslation();
 
     const NAVIGATION_ITEMS = generateNavigationItemsWithTranslation(t);
+    const DATA_STRUCTURES_ITEMS = generateDataStructuresNavigationItemsWithTranslation(t);
 
     return (
         <div className="navbar bg-base-100">
@@ -27,6 +32,7 @@ function Navigation() {
                             </Link>
                         </li>
                     ))}
+                    <NavigationDropdown title={t("dataStructures")} options={DATA_STRUCTURES_ITEMS} />
                 </ul>
             </div>
             <div className="navbar-end gap-4">
@@ -41,6 +47,9 @@ function NavigationMobile() {
     const { t } = useTranslation();
 
     const NAVIGATION_ITEMS = generateNavigationItemsWithTranslation(t);
+    const DATA_STRUCTURES_ITEMS = generateDataStructuresNavigationItemsWithTranslation(t);
+
+    const COMBINED_NAVIGATION_ITEMS = [...NAVIGATION_ITEMS, ...DATA_STRUCTURES_ITEMS];
 
     return (
         <div className="dropdown">
@@ -48,7 +57,7 @@ function NavigationMobile() {
                 <NavigationLogo />
             </div>
             <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                {NAVIGATION_ITEMS.map((item) => (
+                {COMBINED_NAVIGATION_ITEMS.map((item) => (
                     <li key={item.href}>
                         <Link to={item.href}>{item.title}</Link>
                     </li>

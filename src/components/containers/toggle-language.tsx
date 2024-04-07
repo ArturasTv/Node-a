@@ -16,7 +16,7 @@ function ToggleLanguage() {
 
     return (
         <div className="flex items-center space-x-2 ">
-            <span className="text-sm">{t("language")}:</span>
+            <span className="text-sm hidden md:block">{t("language")}:</span>
             <label className="swap swap-rotate shrink-0">
                 <input type="checkbox" checked={language === "lt"} onChange={toggleLanguage} />
                 <Flag className="swap-on" size="28" code="lt" />

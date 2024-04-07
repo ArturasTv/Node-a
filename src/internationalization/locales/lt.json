@@ -45,5 +45,6 @@
     "dataStructuresVisualization": "Duomenų struktūrų vizualizacija",
     "exploreAndManipulateDataStructures": "Vizualiai tyrinėkite ir manipuliuokite įvairiomis duomenų struktūromis.",
     "moreDataStructuresComingSoon": "Netrukus bus papildyta naujomis duomenų struktūromis.",
-    "copyright": "© {{currentYear}} Node'a. Visos teisės saugomos."
+    "copyright": "© {{currentYear}} Node'a. Visos teisės saugomos.",
+    "dataStructures": "Duomenų struktūros"
 }
