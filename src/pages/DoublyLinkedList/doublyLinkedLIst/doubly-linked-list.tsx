@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useDoublyLinkedListStore from "../../../stores/doublyLinkedListStore";
 import Node from "../../../components/ui/node";
 import { DoublyLinkedListNode } from "../../../models/common";
+import Arrow from "../../../components/ui/arrow";
 
 type Props = {
   head: DoublyLinkedListNode | null;
@@ -42,9 +43,9 @@ function DoublyLinkedList({ head, onDelete }: Props) {
   }, [length, head]);
 
   return (
-    <>
+    <div className="fill-primary stroke-0 stroke-primary">
       <Reorder.Group
-        className="flex gap-4 flex-wrap"
+        className="flex gap-8 flex-wrap"
         values={items}
         onReorder={() => null}
       >
@@ -54,6 +55,7 @@ function DoublyLinkedList({ head, onDelete }: Props) {
             draggable
             dragSnapToOrigin={false}
             value={node}
+            id={`doubly-linked-list-node-${node.data}`}
             key={`${node.data}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -64,7 +66,19 @@ function DoublyLinkedList({ head, onDelete }: Props) {
           </Reorder.Item>
         ))}
       </Reorder.Group>
-    </>
+      {items.map((_, index) => {
+        if (index === items.length - 1) return null;
+
+        return (
+          <Arrow
+            key={index}
+            startElement={`doubly-linked-list-node-${items[index].data}`}
+            endElement={`doubly-linked-list-node-${items[index + 1].data}`}
+            showTail
+          />
+        );
+      })}
+    </div>
   );
 }
 
